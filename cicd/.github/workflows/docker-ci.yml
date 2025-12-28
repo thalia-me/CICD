@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Dito natin ituturo na lahat ng steps ay gagawin sa loob ng cicd folder
+    defaults:
+      run:
+        working-directory: cicd
 
     steps:
       - name: Checkout code
@@ -26,9 +30,7 @@ jobs:
 
       - name: Run Django Tests
         run: |
-          python manage.py test || true   # prevent failing if no tests
+          python manage.py test || true
 
       - name: Build Docker image
-        run: |
-          cd cicd
-          docker build -t eco .
+        run: docker build -t eco .
