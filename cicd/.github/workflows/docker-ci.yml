@@ -29,4 +29,6 @@ jobs:
           python manage.py test || true   # prevent failing if no tests
 
       - name: Build Docker image
-        run: docker buildx build -t eco -f cicd/Dockerfile .
+        run: |
+          cd cicd
+          docker build -t eco .
